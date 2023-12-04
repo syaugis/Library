@@ -50,7 +50,7 @@ class AuthorController extends Controller
             return back()->withErrors($response['error'])->withInput();
         }
 
-        return redirect()->route('admin.author.index');
+        return redirect()->route('admin.author.index')->withSuccess(__('global-message.save_form', ['form' => 'Author data']));
     }
 
     public function edit($id): View

@@ -50,7 +50,7 @@ class CategoryController extends Controller
             return back()->withErrors($response['error'])->withInput();
         }
 
-        return redirect()->route('admin.category.index');
+        return redirect()->route('admin.category.index')->withSuccess(__('global-message.save_form', ['form' => 'Category data']));
     }
 
     public function edit($id): View

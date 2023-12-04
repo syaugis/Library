@@ -30,9 +30,10 @@
                         <div class="new-user-info">
                             <div class="row">
                                 <div class="form-group col-md-12">
-                                    <label class="form-label" for="fname">Name<span
+                                    <label class="form-label" for="author_name">Name<span
                                             class="text-danger">*</span></label>
                                     {!! Form::text('name', old('name'), [
+                                        'id' => 'author_name',
                                         'class' => 'form-control' . ($errors->has('name') ? ' is-invalid' : ''),
                                         'placeholder' => 'Book Author Name',
                                         'autofocus',

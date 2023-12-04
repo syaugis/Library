@@ -33,6 +33,7 @@
                                     <label class="form-label" for="title">Book Title<span
                                             class="text-danger">*</span></label>
                                     {!! Form::text('title', old('title'), [
+                                        'id' => 'title',
                                         'class' => 'form-control' . ($errors->has('title') ? ' is-invalid' : ''),
                                         'placeholder' => 'Book Title',
                                         'autofocus',
@@ -54,6 +55,7 @@
                                         $id ? $data->authors->pluck('name', 'id')->toArray() : [],
                                         old('authors', $id ? array_keys($data->authors->pluck('name', 'id')->toArray()) : []),
                                         [
+                                            'id' => 'authors',
                                             'class' => 'form-control authors' . ($errors->has('authors') ? ' is-invalid' : ''),
                                             'multiple' => 'multiple',
                                             'autofocus',
@@ -72,6 +74,7 @@
                                     <label class="form-label" for="publisher">Book Publisher<span
                                             class="text-danger">*</span></label>
                                     {!! Form::text('publisher', old('publisher'), [
+                                        'id' => 'publisher',
                                         'class' => 'form-control' . ($errors->has('publisher') ? ' is-invalid' : ''),
                                         'placeholder' => 'Book Publisher',
                                         'autofocus',
@@ -89,6 +92,7 @@
                                     <label class="form-label" for="published_year">Book Published Year<span
                                             class="text-danger">*</span></label>
                                     {!! Form::number('published_year', old('published_year'), [
+                                        'id' => 'published_year',
                                         'class' => 'form-control' . ($errors->has('published_year') ? ' is-invalid' : ''),
                                         'placeholder' => 'Book Published Year',
                                         'autofocus',
@@ -112,6 +116,7 @@
                                         $id ? $data->categories->pluck('name', 'id')->toArray() : [],
                                         old('categories', $id ? array_keys($data->categories->pluck('name', 'id')->toArray()) : []),
                                         [
+                                            'id' => 'categories',
                                             'class' => 'form-control categories' . ($errors->has('categories') ? ' is-invalid' : ''),
                                             'multiple' => 'multiple',
                                             'autofocus',
@@ -129,6 +134,7 @@
                                 <div class="form-group col-md-12">
                                     <label class="form-label" for="isbn">Book ISBN</label>
                                     {!! Form::text('isbn', old('isbn'), [
+                                        'id' => 'isbn',
                                         'class' => 'form-control' . ($errors->has('isbn') ? ' is-invalid' : ''),
                                         'placeholder' => 'Book ISBN',
                                         'autofocus',
@@ -149,6 +155,7 @@
                                         ['Indonesia' => 'Indonesia', 'Arab' => 'Arab', 'Inggris' => 'Inggris'],
                                         old('language'),
                                         [
+                                            'id' => 'language',
                                             'class' => 'form-control' . ($errors->has('language') ? ' is-invalid' : ''),
                                             'placeholder' => 'Select Book Language',
                                             'required',
@@ -166,6 +173,7 @@
                                     <label class="form-label" for="pages">Book Pages<span
                                             class="text-danger">*</span></label>
                                     {!! Form::number('pages', old('pages'), [
+                                        'id' => 'pages',
                                         'class' => 'form-control' . ($errors->has('pages') ? ' is-invalid' : ''),
                                         'placeholder' => 'Book Pages',
                                         'autofocus',
@@ -182,6 +190,7 @@
                                 <div class="form-group col-md-12">
                                     <label class="form-label" for="cover_image">Book Cover Image</label>
                                     {!! Form::file('cover_image', [
+                                        'id' => 'cover_image',
                                         'class' => 'form-control' . ($errors->has('cover_image') ? ' is-invalid' : ''),
                                         'accept' => 'image/jpeg,image/png,image/jpg',
                                     ]) !!}
