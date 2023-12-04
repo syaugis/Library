@@ -36,8 +36,8 @@ class LoanService
             'book_copy_id' => 'required|exists:book_copies,id',
             'user_id' => 'required|exists:users,id',
             'loan_date' => 'required|date',
-            'return_date' => 'required|date',
-            'status' => 'required|in:pending,approved,rejected,returned',
+            'return_date' => 'nullable|date',
+            'status' => 'required|in:0,1,2,3,4',
         ]);
 
         if ($validator->fails()) {
@@ -64,8 +64,8 @@ class LoanService
             'book_copy_id' => 'required|exists:book_copies,id',
             'user_id' => 'required|exists:users,id',
             'loan_date' => 'required|date',
-            'return_date' => 'required|date',
-            'status' => 'required|in:pending,approved,rejected,returned',
+            'return_date' => 'nullable|date',
+            'status' => 'required|in:0,1,2,3,4',
         ]);
 
         if ($validator->fails()) {

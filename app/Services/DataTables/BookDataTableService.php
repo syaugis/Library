@@ -46,7 +46,7 @@ class BookDataTableService extends DataTable
      */
     public function query(Book $model): QueryBuilder
     {
-        return $model->newQuery()->with('categories');
+        return $model->newQuery()->with(['categories', 'authors'])->select('books.*');
     }
 
     /**
@@ -83,11 +83,16 @@ class BookDataTableService extends DataTable
                 ->width(100),
             Column::make('title'),
             Column::make('authors')
+                ->data('authors')
+                ->name('authors.name')
                 ->title('Author')
                 ->width(80),
             Column::make('publisher'),
             Column::make('published_year'),
-            Column::make('categories')->title('Category'),
+            Column::make('categories')
+                ->data('categories')
+                ->name('categories.name')
+                ->title('Category'),
             Column::make('isbn')->title('ISBN'),
             Column::make('language'),
             Column::make('pages'),

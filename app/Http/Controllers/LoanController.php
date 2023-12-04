@@ -35,7 +35,8 @@ class LoanController extends Controller
 
     public function create(): View
     {
-        return view('admin.loan.form');
+        $assets = ['select2'];
+        return view('admin.loan.form', compact('assets'));
     }
 
     public function store(Request $request): RedirectResponse
@@ -54,13 +55,14 @@ class LoanController extends Controller
             return back()->withErrors($response['error'])->withInput();
         }
 
-        return redirect()->route('admin.loan.index');
+        return redirect()->route('admin.loan.index')->withSuccess(__('global-message.save_form', ['form' => 'Loan data']));
     }
 
     public function edit($id): View
     {
+        $assets = ['select2'];
         $data = $this->loanService->getById($id);
-        return view('admin.loan.form', compact('data', 'id'));
+        return view('admin.loan.form', compact('assets', 'data', 'id'));
     }
 
     public function update(Request $request, $id): RedirectResponse

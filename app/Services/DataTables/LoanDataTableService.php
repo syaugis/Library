@@ -4,6 +4,7 @@ namespace App\Services\DataTables;
 
 use App\Models\Loan;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
+use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
@@ -21,8 +22,35 @@ class LoanDataTableService extends DataTable
     {
         return (new EloquentDataTable($query))
             ->setRowId('id')
+            ->editColumn('status', function ($query) {
+                switch ($query->status) {
+                    case '0':
+                        return '<span class="text-capitalize badge bg-primary mb-2"> Pending </span>';
+                        break;
+                    case '1':
+                        return '<span class="text-capitalize badge bg-info mb-2"> Approved and Loaned </span>';
+                        break;
+                    case '2':
+                        return '<span class="text-capitalize badge bg-warning mb-2"> Exceed Limit Day </span>';
+                        break;
+                    case '3':
+                        return '<span class="text-capitalize badge bg-danger mb-2"> Rejected </span>';
+                        break;
+                    case '4':
+                        return '<span class="text-capitalize badge bg-success mb-2"> Returned </span>';
+                        break;
+                }
+            })
+            ->filterColumn('status', function ($query, $keyword) {
+                $sql = 'CASE WHEN status = 0 THEN "Pending" 
+                           WHEN status = 1 THEN "Approved and Loaned"
+                           WHEN status = 2 THEN "Exceed Limit Day"
+                           WHEN status = 3 THEN "Rejected"
+                           WHEN status = 4 THEN "Returned" END like ?';
+                $query->whereRaw($sql, ["%{$keyword}%"]);
+            })
             ->addColumn('action', 'admin.loan.action')
-            ->rawColumns(['action']);
+            ->rawColumns(['action', 'status']);
     }
 
     /**
@@ -30,7 +58,9 @@ class LoanDataTableService extends DataTable
      */
     public function query(Loan $model): QueryBuilder
     {
-        return $model->newQuery();
+        return $model->newQuery()
+            ->with(['user', 'bookCopy.book'])
+            ->select('loans.*');
     }
 
     /**
@@ -61,8 +91,8 @@ class LoanDataTableService extends DataTable
     {
         return [
             Column::make('id')->title('ID'),
-            Column::make('book_copy_id')->title('Book ID'),
-            Column::make('user_id')->title('User ID'),
+            Column::make('bookCopy.book.title')->data('book_copy.book.title')->title('Book Title'),
+            Column::make('user.name')->data('user.name')->title('User Name'),
             Column::make('loan_date'),
             Column::make('return_date'),
             Column::make('status'),
