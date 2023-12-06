@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\BookCopyController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoanController;
@@ -57,6 +58,15 @@ Route::middleware(['auth', 'user-access:admin'])->prefix('admin')->group(functio
         Route::get('edit/{id}', 'edit')->name('admin.book.edit');
         Route::put('edit/{id}', 'update')->name('admin.book.update');
         Route::delete('destroy/{id}', 'destroy')->name('admin.book.destroy');
+    });
+
+    Route::controller(BookCopyController::class)->prefix('book/copy')->group(function () {
+        Route::get('', 'index')->name('admin.book_copy.index');
+        Route::get('add/{id}', 'create')->name('admin.book_copy.create');
+        Route::post('add/{id}', 'store')->name('admin.book_copy.store');
+        Route::get('edit/{id}', 'edit')->name('admin.book_copy.edit');
+        Route::put('edit/{id}', 'update')->name('admin.book_copy.update');
+        Route::delete('destroy/{id}', 'destroy')->name('admin.book_copy.destroy');
     });
 
     Route::controller(LoanController::class)->prefix('loan')->group(function () {

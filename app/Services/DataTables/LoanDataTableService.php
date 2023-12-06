@@ -59,7 +59,7 @@ class LoanDataTableService extends DataTable
     public function query(Loan $model): QueryBuilder
     {
         return $model->newQuery()
-            ->with(['user', 'bookCopy.book'])
+            ->with(['user:id,name', 'bookCopy:id,book_id', 'bookCopy.book:id,title'])
             ->select('loans.*');
     }
 

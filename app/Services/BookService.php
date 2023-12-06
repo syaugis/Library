@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Book;
+use App\Repositories\BookCopyRepository;
 use App\Repositories\BookRepository;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
@@ -14,10 +15,12 @@ use Illuminate\Validation\Rule;
 class BookService
 {
     protected $bookRepository;
+    protected $bookCopyRepository;
 
-    public function __construct(BookRepository $bookRepository)
+    public function __construct(BookRepository $bookRepository, BookCopyRepository $bookCopyRepository)
     {
         $this->bookRepository = $bookRepository;
+        $this->bookCopyRepository = $bookCopyRepository;
     }
 
     public function getAll(): Collection
@@ -52,7 +55,7 @@ class BookService
         try {
             $book = $this->bookRepository->store($data);
             $quantity = $data['quantity'] ?? 1;
-            $this->bookRepository->storeBookCopies($book, $quantity);
+            $this->bookCopyRepository->store($book, $quantity);
         } catch (Exception $e) {
             DB::rollBack();
             Log::info($e->getMessage());

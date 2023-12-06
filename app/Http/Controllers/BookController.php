@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\BookService;
+use App\Services\DataTables\BookCopyDataTableService;
 use App\Services\DataTables\BookDataTableService;
 use Exception;
 use Illuminate\Http\RedirectResponse;
@@ -13,11 +14,13 @@ class BookController extends Controller
 {
     protected $bookService;
     protected $bookDataTableService;
+    protected $bookCopyDataTableService;
 
-    public function __construct(BookService $bookService, BookDataTableService $bookDataTableService)
+    public function __construct(BookService $bookService, BookDataTableService $bookDataTableService, BookCopyDataTableService $bookCopyDataTableService)
     {
         $this->bookService = $bookService;
         $this->bookDataTableService = $bookDataTableService;
+        $this->bookCopyDataTableService = $bookCopyDataTableService;
     }
 
     public function index()
@@ -62,12 +65,16 @@ class BookController extends Controller
         return redirect()->route('admin.book.index')->withSuccess(__('global-message.save_form', ['form' => 'Book data']));
     }
 
-    public function edit($id): View
+    public function edit($id)
     {
-        $assets = ['select2'];
+        $assets = ['select2', 'data-table'];
+        $pageTitle = 'Book List Data';
+        $headerAction = '<a class="btn btn-sm btn-primary" data-toggle="modal" id="formAdd" 
+            data-target="#formModal"data-attr="' . route('admin.book_copy.create', $id) . '"
+            role="button">Add Book Copies</a>';
         $data = $this->bookService->getById($id);
 
-        return view('admin.book.form', compact('assets', 'data', 'id'));
+        return $this->bookCopyDataTableService->withBookId($id)->render('admin.book.form', compact('assets', 'pageTitle', 'headerAction', 'data', 'id'));
     }
 
     public function update(Request $request, $id): RedirectResponse

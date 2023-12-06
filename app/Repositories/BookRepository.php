@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Models\Book;
-use App\Models\BookCopy;
 use Illuminate\Database\Eloquent\Collection;
 
 class BookRepository
@@ -11,10 +10,9 @@ class BookRepository
     protected $book;
     protected $bookCopy;
 
-    public function __construct(Book $book, BookCopy $bookCopy)
+    public function __construct(Book $book)
     {
         $this->book = $book;
-        $this->bookCopy = $bookCopy;
     }
 
     public function getAll(): Collection
@@ -48,15 +46,6 @@ class BookRepository
         $book->categories()->sync($data['categories']);
 
         return $book;
-    }
-
-    public function storeBookCopies(Book $book, int $quantity): void
-    {
-        for ($i = 0; $i < $quantity; $i++) {
-            $bookCopy = new $this->bookCopy;
-            $bookCopy->book()->associate($book);
-            $bookCopy->save();
-        }
     }
 
     public function update($data, $id): Book
