@@ -21,7 +21,7 @@ class BookDataTableService extends DataTable
     {
         return (new EloquentDataTable($query))
             ->setRowId('id')
-            ->addColumn('cover_image', function ($book) {
+            ->editColumn('cover_image', function ($book) {
                 $url = $book->cover_image ? asset("uploads/img_books/$book->cover_image") : asset('images/error/no_cover.png');
                 return '<img src=' . $url . ' class="img-rounded" style="max-width: 100px" align="center"/>';
             })
