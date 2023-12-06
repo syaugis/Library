@@ -4,7 +4,8 @@
             <div class="col-md-12">
                 <div class="d-flex justify-content-between align-items-center flex-wrap">
                     <div>
-                        <h1>Hello {{ Auth::user()->name }}! </h1>
+                        {{-- <h1>Hello {{ Auth::user()->name }}! </h1> --}}
+                        <h1> Wonorejo RW 8 Library </h1>
                     </div>
                 </div>
             </div>

@@ -81,6 +81,7 @@ class BookRepository
         $book = $this->book->find($id);
         $book->categories()->detach();
         $book->authors()->detach();
+        $book->copies()->delete();
         $imageName = $book->getAttribute('cover_image');
         if (!empty($imageName) && file_exists("uploads/img_books/" . $imageName)) {
             unlink('uploads/img_books/' . $imageName);

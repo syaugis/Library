@@ -2,6 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Author;
+use App\Models\BookCopy;
+use App\Models\Category;
+use App\Models\Loan;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -29,6 +35,13 @@ class HomeController extends Controller
     public function admin(Request $request)
     {
         $assets = ['chart', 'animation'];
-        return view('admin.dashboard', compact('assets'));
+        $data['total_books'] = BookCopy::count();
+        $data['total_categories'] = Category::count();
+        $data['total_authors'] = Author::count();
+        $data['total_loans'] = Loan::count();
+        $data['total_user'] = User::where('role', 1)->count();
+        $data['new_members'] = User::where('role', 1)->whereDate('created_at', Carbon::today())->count();
+
+        return view('admin.dashboard', compact('assets', 'data'));
     }
 }

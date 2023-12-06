@@ -64,9 +64,12 @@
                             <img src="{{ asset('images/avatars/avtar_3.png') }}" alt="User-Profile"
                                 class="theme-color-pink-img img-fluid avatar avatar-50 avatar-rounded">
                         @endif
-                        <div class="caption ms-3 d-none d-md-block ">
+                        {{-- <div class="caption ms-3 d-none d-md-block ">
                             <h6 class="mb-0 caption-title">{{ Auth::user()->name }}</h6>
                             <p class="mb-0 caption-sub-title text-capitalize">{{ Auth::user()->role }}</p>
+                        </div> --}}
+                        <div class="caption ms-3 mb-3 d-none d-md-block ">
+                            <p class="mb-0 caption-title text-capitalize">{{ Auth::user()->name }}</p>
                         </div>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -78,7 +81,7 @@
                                 @csrf
                                 <a href="javascript:void(0)" class="dropdown-item"
                                     onclick="event.preventDefault();
-              this.closest('form').submit();">
+                                        this.closest('form').submit();">
                                     {{ __('Log out') }}
                                 </a>
                             </form>
