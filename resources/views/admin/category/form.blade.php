@@ -27,29 +27,28 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="new-user-info">
-                            <div class="row">
-                                <div class="form-group col-md-12">
-                                    <label class="form-label" for="category_name">Name<span
-                                            class="text-danger">*</span></label>
-                                    {!! Form::text('name', old('name'), [
-                                        'id' => 'category_name',
-                                        'class' => 'form-control' . ($errors->has('name') ? ' is-invalid' : ''),
-                                        'placeholder' => 'Book Category Name',
-                                        'autofocus',
-                                        'required',
-                                    ]) !!}
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <label class="form-label" for="category_name">Name<span
+                                        class="text-danger">*</span></label>
+                                {!! Form::text('name', old('name'), [
+                                    'id' => 'category_name',
+                                    'class' => 'form-control' . ($errors->has('name') ? ' is-invalid' : ''),
+                                    'placeholder' => 'Book Category Name',
+                                    'autofocus',
+                                    'required',
+                                ]) !!}
 
-                                    @error('name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
-                            <button type="submit" class="btn btn-primary">{{ $id !== null ? 'Update' : 'Add' }}
-                                Category</button>
                         </div>
+                        <button type="submit" class="btn btn-primary">{{ $id !== null ? 'Update' : 'Add' }}
+                            Category
+                        </button>
                     </div>
                 </div>
 
