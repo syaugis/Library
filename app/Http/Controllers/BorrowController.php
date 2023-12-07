@@ -31,7 +31,7 @@ class BorrowController extends Controller
         $response = $this->loanService->store($data);
 
         if (isset($response['error'])) {
-            return back()->withErrors($response['error'])->withInput();
+            return back()->withErrors($response['error']);
         }
 
         return redirect()->route('home');
