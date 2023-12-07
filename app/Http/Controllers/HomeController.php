@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Author;
+use App\Models\Book;
 use App\Models\BookCopy;
 use App\Models\Category;
 use App\Models\Loan;
@@ -13,23 +14,23 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-    /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('home');
+        $query = $request->input('keywords');
+
+        if ($query) {
+            $books = Book::where('title', 'like', '%' . $query . '%')
+                // ->orWhere('author', 'like', '%' . $query . '%')
+                ->paginate(5);
+        } else {
+            $books = Book::paginate(5);
+        }
+
+        return view('home', compact('books'));
     }
 
     public function admin(Request $request)

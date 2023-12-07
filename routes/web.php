@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\BookCopyController;
+use App\Http\Controllers\BorrowController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoanController;
@@ -24,6 +25,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes(['verify' => true]);
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/search', [HomeController::class, 'index'])->name('search');
 
 /*------------------------------------------
 --------------------------------------------
@@ -103,4 +105,9 @@ All Normal Users Routes List
 --------------------------------------------*/
 
 Route::middleware(['auth', 'user-access:user'])->group(function () {
+    Route::prefix('select2')->group(function () {
+        Route::post('books', [Select2Controller::class, 'getBooks'])->name('admin.get.books');
+    });
+
+    Route::post('borrow/{id}', [BorrowController::class, 'borrow'])->name('member.borrow');
 });
