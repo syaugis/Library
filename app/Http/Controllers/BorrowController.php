@@ -17,12 +17,8 @@ class BorrowController extends Controller
         $this->loanService = $loanService;
     }
 
-    public function borrow(Request $request, $id): RedirectResponse
+    public function borrow($id): RedirectResponse
     {
-        // $data = $request->only([
-        //     'id',
-        // ]);
-
         $data['book_copy_id'] = $id;
         $data['user_id'] = Auth::user()->id;
         $data['loan_date'] = Carbon::now();
@@ -31,9 +27,9 @@ class BorrowController extends Controller
         $response = $this->loanService->store($data);
 
         if (isset($response['error'])) {
-            return back()->withErrors($response['error']);
+            return back()->withErrors(['error' => 'Gagal melakukan peminjaman buku']);
         }
 
-        return redirect()->route('home');
+        return redirect()->route('home')->with('success', 'Buku telah berhasil dipinjam! <br>Harap menunggu konfirmasi...');
     }
 }

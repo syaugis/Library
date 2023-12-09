@@ -21,11 +21,22 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $query = $request->input('keywords');
+        $keywords = explode(' ', $query);
 
         if ($query) {
-            $books = Book::where('title', 'like', '%' . $query . '%')
-                // ->orWhere('author', 'like', '%' . $query . '%')
-                ->paginate(5);
+            $books = Book::where(function ($query) use ($keywords) {
+                foreach ($keywords as $keyword) {
+                    $query->where(function ($subQuery) use ($keyword) {
+                        $subQuery->where('title', 'like', '%' . $keyword . '%')
+                            ->orWhereHas('authors', function ($authorQuery) use ($keyword) {
+                                $authorQuery->where('name', 'like', '%' . $keyword . '%');
+                            })
+                            ->orWhereHas('categories', function ($categoryQuery) use ($keyword) {
+                                $categoryQuery->where('name', 'like', '%' . $keyword . '%');
+                            });
+                    });
+                }
+            })->paginate(5);
         } else {
             $books = Book::paginate(5);
         }

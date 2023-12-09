@@ -5,6 +5,7 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\BookCopyController;
 use App\Http\Controllers\BorrowController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoanController;
 use App\Http\Controllers\Select2Controller;
@@ -110,4 +111,6 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
     });
 
     Route::post('borrow/{id}', [BorrowController::class, 'borrow'])->name('member.borrow');
+
+    Route::get('history', [HistoryController::class, 'index'])->name('member.history');
 });

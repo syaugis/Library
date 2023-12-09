@@ -72,7 +72,7 @@
 
 .navbar-collapse.collapsing,
 .navbar-collapse.collapse.show {
-    background-color: #2d3748;
+    background-color: #212529;
     padding: 16px;
     z-index: 99;
     border-radius: 4px;
@@ -134,6 +134,14 @@
 
 .overlay-container:hover img {
     transform: scale(1.1); 
+}
+
+.relations a {
+    font-size: 12px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    padding-left: 16px;
+    padding-right: 16px;
 }
 
 @media (max-width: 767.98px) {

@@ -21,21 +21,21 @@
                                     </div>
 
                                     <div class="col-md-6 col-lg-6 col-xl-6">
-                                        <h4>{{ $book->title }}</h4>
-                                        <div class="d-flex flex-row">
-                                            <div class="text-danger mb-1 me-2">
-                                                @foreach ($book->authors as $author)
-                                                    <i>{{ $author->name }}</i>;
-                                                @endforeach
-                                            </div>
+                                        <h3 style="font-weight: 600">{{ $book->title }}</h3>
+                                        <div class="d-flex relations flex-wrap">
+                                            @foreach ($book->authors as $author)
+                                                <a href="{{ route('search') . '?keywords=' . str_replace(' ', '+', $author->name) }}"
+                                                    class="btn btn-outline-primary btn-rounded">
+                                                    {{ $author->name }} </a>
+                                            @endforeach
                                         </div>
 
-                                        <div class="d-flex flex-row">
-                                            <div class="text-danger mb-1 me-2">
-                                                @foreach ($book->categories as $category)
-                                                    <i>{{ $category->name }}</i>;
-                                                @endforeach
-                                            </div>
+                                        <div class="d-flex relations flex-wrap mb-2">
+                                            @foreach ($book->categories as $category)
+                                                <a href="{{ route('search') . '?keywords=' . str_replace(' ', '+', $category->name) }}"
+                                                    class="btn btn-outline-secondary btn-rounded">
+                                                    {{ $category->name }} </a>
+                                            @endforeach
                                         </div>
                                         <div class="row">
                                             <dt class="col-sm-6">Penerbit</dt>
@@ -43,7 +43,7 @@
                                             <dt class="col-sm-6">Tahun Terbit</dt>
                                             <dd class="col-sm-6">{{ $book->published_year }}</dd>
                                             <dt class="col-sm-6">ISBN</dt>
-                                            <dd class="col-sm-6">{{ $book->isbn }}</dd>
+                                            <dd class="col-sm-6">{{ $book->isbn ? $book->isbn : 'Tidak Ada' }}</dd>
                                             <dt class="col-sm-6">Bahasa</dt>
                                             <dd class="col-sm-6">{{ $book->language }}</dd>
                                             <dt class="col-sm-6">Jumlah Halaman</dt>
@@ -63,14 +63,15 @@
                                             </div>
                                         </div>
                                         <div class="d-flex flex-column mt-4">
-                                            <button class="btn btn-primary btn-sm" type="button">Detail Buku</button>
+                                            <button class="btn btn-primary btn-sm w-100" type="button">Detail Buku</button>
                                             <form
                                                 action="{{ route('member.borrow', empty($book->copies->where('is_available', true)->first()->id) ? 'null' : $book->copies->where('is_available', true)->first()->id) }}"
-                                                method="post">
+                                                method="post" id="borrow-form-{{ $book->id }}">
                                                 @csrf
                                                 <button
-                                                    class="btn btn-outline-primary btn-sm mt-2 {{ empty($book->copies->where('is_available', true)->first()->id) ? 'disabled' : '' }}"
-                                                    type="submit">
+                                                    class="btn btn-outline-primary btn-sm w-100 mt-2 
+                                                    {{ empty($book->copies->where('is_available', true)->first()->id) ? 'disabled' : '' }}"
+                                                    onclick="showConfirmation({{ $book->id }})" type="button">
                                                     Tambahkan ke peminjaman
                                                 </button>
                                             </form>
@@ -80,6 +81,9 @@
                             </div>
                         </div>
                     @endforeach
+                    <div class="d-flex justify-content-center">
+                        {!! $books->links() !!}
+                    </div>
                 @else
                     <div class="card elevation shadow-0 border rounded mt-5 mb-5">
                         <div class="card-body text-center mt-3 mb-2">
