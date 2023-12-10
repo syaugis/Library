@@ -10,6 +10,7 @@ use App\Models\Loan;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class HomeController extends Controller
 {
@@ -55,5 +56,11 @@ class HomeController extends Controller
         $data['new_members'] = User::where('role', 1)->whereDate('created_at', Carbon::today())->count();
 
         return view('admin.dashboard', compact('assets', 'data'));
+    }
+
+    public function detail_book($id): View
+    {
+        $book = Book::where('id', $id)->first();
+        return view('member.detail.index', compact('book'));
     }
 }

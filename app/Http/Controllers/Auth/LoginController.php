@@ -62,7 +62,7 @@ class LoginController extends Controller
             }
         } else {
             return redirect()->route('login')
-                ->withErrors(['error' => 'Email address or password is incorrect'])
+                ->withErrors(['error' => 'Alamat email atau password salah.'])
                 ->withInput();
         }
     }

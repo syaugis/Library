@@ -13,7 +13,7 @@
     </div>
     <main>
         <div class="content">
-            <div class="container" style="margin-bottom:8.5rem;">
+            <div class="container" style="margin-bottom:18rem;">
                 <div class="row justify-content-center">
                     <div class="row">
                         <div class="col-md-12">
@@ -34,7 +34,7 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="table-responsive">
-                                                <table class="table table-hover">
+                                                <table class="table table-striped table-hover">
                                                     <thead>
                                                         <tr>
                                                             <th scope="col">Index</th>

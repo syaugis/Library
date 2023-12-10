@@ -26,6 +26,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes(['verify' => true]);
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('book/{id}', [HomeController::class, 'detail_book'])->name('detail.book');
 Route::get('/search', [HomeController::class, 'index'])->name('search');
 
 /*------------------------------------------

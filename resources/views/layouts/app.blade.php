@@ -3,10 +3,6 @@
 
 <head>
     @include('member.partials._head')
-    <!-- CSS  -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-rc.0/css/select2.min.css"
-        integrity="sha512-aD9ophpFQ61nFZP6hXYu4Q/b/USW7rpLCQLX6Bi0WJHXNO7Js/fUENpBQf/+P4NtpzNX0jSgR5zVvPOJp+W2Kg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -36,7 +32,6 @@
                                     <div class="card border-0 shadow" style="background-color: rgb(255, 255, 255);">
                                         <div class="card-body" style="padding: 0.55rem;">
                                             <form action="{{ route('search') }}" method="get">
-                                                {{-- <input type="hidden" name="search" value="search"> --}}
                                                 <input value="{{ request('keywords') }}" type="text"
                                                     id="search-input" name="keywords" autocomplete="off"
                                                     placeholder="Masukkan judul buku, nama pengarang atau kategori untuk mencari koleksi..."
@@ -99,34 +94,5 @@
         @endif
     </script>
 </body>
-
-{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-rc.0/js/select2.min.js"
-    integrity="sha512-4MvcHwcbqXKUHB6Lx3Zb5CEAVoE9u84qN+ZSMM6s7z8IeJriExrV3ND5zRze9mxNlABJ6k864P/Vl8m0Sd3DtQ=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
-{{-- <script type="text/javascript">
-    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
-    $(document).ready(function() {
-        $(".search").select2({
-            ajax: {
-                url: "{{ route('admin.get.books') }}",
-                type: "post",
-                dataType: 'json',
-                delay: 250,
-                data: function(params) {
-                    return {
-                        _token: CSRF_TOKEN,
-                        search: params.term
-                    };
-                },
-                processResults: function(response) {
-                    return {
-                        results: response
-                    };
-                },
-                cache: true
-            }
-        });
-    });
-</script> --}}
 
 </html>

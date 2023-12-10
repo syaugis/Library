@@ -1,9 +1,12 @@
     <div class="container">
-        <a class="navbar-brand inline-flex items-center" href="{{ url('/') }}">
-            {{-- <img class="h-8 w-8" src="logo"> --}}
-            <div class="inline-flex flex-col leading-tight ml-2">
-                <h3 class="text-lg m-0 p-0">Perpustakaan</h3>
-                <h4 class="text-sm lead m-0 p-0"> Wonorejo RW 8</h4>
+        <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
+            <div class="d-flex align-items-center me-3">
+                <img alt="logo" class="img-fluid" style="max-width: 150px; max-height: 50px;"
+                    src="{{ asset('images/icons/surabaya.png') }}">
+            </div>
+            <div class="d-flex flex-column ml-2">
+                <h3 class="m-0">Perpustakaan</h3>
+                <h4 class="lead m-0">Wonorejo RW 8</h4>
             </div>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"

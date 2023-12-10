@@ -63,17 +63,24 @@
                                             </div>
                                         </div>
                                         <div class="d-flex flex-column mt-4">
-                                            <button class="btn btn-primary btn-sm w-100" type="button">Detail Buku</button>
+                                            <a class="btn btn-primary btn-sm w-100"
+                                                href="{{ route('detail.book', $book->id) }}" type="button">Detail Buku</a>
                                             <form
                                                 action="{{ route('member.borrow', empty($book->copies->where('is_available', true)->first()->id) ? 'null' : $book->copies->where('is_available', true)->first()->id) }}"
                                                 method="post" id="borrow-form-{{ $book->id }}">
                                                 @csrf
-                                                <button
-                                                    class="btn btn-outline-primary btn-sm w-100 mt-2 
-                                                    {{ empty($book->copies->where('is_available', true)->first()->id) ? 'disabled' : '' }}"
-                                                    onclick="showConfirmation({{ $book->id }})" type="button">
-                                                    Tambahkan ke peminjaman
-                                                </button>
+
+                                                @if (!empty($book->copies->where('is_available', true)->first()->id))
+                                                    <button class="btn btn-outline-primary btn-sm w-100 mt-2"
+                                                        onclick="showConfirmation({{ $book->id }})" type="button">
+                                                        Tambahkan ke peminjaman
+                                                    </button>
+                                                @else
+                                                    <button class="btn btn-outline-secondary btn-sm w-100 mt-2 disabled"
+                                                        type="button">
+                                                        Tidak Tersedia
+                                                    </button>
+                                                @endif
                                             </form>
                                         </div>
                                     </div>
