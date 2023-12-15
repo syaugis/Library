@@ -39,10 +39,21 @@
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            @if (!empty(Auth::user()->profile_image))
+                                <img src="{{ url('uploads/img_profiles/' . Auth::user()->profile_image) }}"
+                                    class="rounded-circle shadow-4-strong me-2" height="30" width="25" alt="Avatar"
+                                    loading="lazy" />
+                            @else
+                                <i class="fa fa-user px-1 py-2" aria-hidden="true"></i>
+                            @endif
                             {{ Auth::user()->name }}
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="navbarDropdown">
+
+                            <a class="dropdown-item" href="{{ route('member.profile') }}">
+                                {{ __('Profil Pengguna') }}
+                            </a>
 
                             <a class="dropdown-item" href="{{ route('member.history') }}">
                                 {{ __('Riwayat Peminjaman') }}

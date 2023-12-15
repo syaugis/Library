@@ -11,7 +11,7 @@ class LoanHelpers
             1 => 'Sedang Dipinjam',
             2 => 'Telah Jatuh Tempo',
             3 => 'Ditolak',
-            3 => 'Telah Dikembalikan',
+            4 => 'Telah Dikembalikan',
         ];
 
         return $statusDescriptions[$id];

@@ -65,7 +65,7 @@
                                                             @foreach ($book->copies as $copy)
                                                                 <tr scope="row">
                                                                     <th scope="row"> {{ $copy->id }} </th>
-                                                                    <td> {{ App\Helpers\LoanHelpers::getStatus($copy->is_available) }}
+                                                                    <td> {{ App\Helpers\BookCopyHelpers::getAvailable($copy->is_available) }}
                                                                     </td>
                                                                 </tr>
                                                             @endforeach

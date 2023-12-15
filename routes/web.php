@@ -8,6 +8,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoanController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Select2Controller;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
@@ -25,6 +26,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Auth::routes(['verify' => true]);
+
+/*------------------------------------------
+--------------------------------------------
+All Visitor Routes List
+--------------------------------------------
+--------------------------------------------*/
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('book/{id}', [HomeController::class, 'detail_book'])->name('detail.book');
 Route::get('/search', [HomeController::class, 'index'])->name('search');
@@ -107,11 +114,8 @@ All Normal Users Routes List
 --------------------------------------------*/
 
 Route::middleware(['auth', 'user-access:user'])->group(function () {
-    Route::prefix('select2')->group(function () {
-        Route::post('books', [Select2Controller::class, 'getBooks'])->name('admin.get.books');
-    });
-
     Route::post('borrow/{id}', [BorrowController::class, 'borrow'])->name('member.borrow');
-
     Route::get('history', [HistoryController::class, 'index'])->name('member.history');
+    Route::get('profile', [ProfileController::class, 'index'])->name('member.profile');
+    Route::put('profile/{id}', [ProfileController::class, 'update'])->name('member.profile.update');
 });

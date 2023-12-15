@@ -2,7 +2,7 @@
 
 namespace App\Helpers;
 
-class LoanHelpers
+class BookCopyHelpers
 {
     public static function getAvailable($id)
     {

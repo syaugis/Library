@@ -35,7 +35,7 @@
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <label for="name">Nama <span class="text-danger">*</span></label>
+                                                <label for="username">Nama<span class="text-danger">*</span></label>
                                                 {!! Form::text('name', old('name'), [
                                                     'id' => 'username',
                                                     'class' => 'form-control' . ($errors->has('name') ? ' is-invalid' : ''),
@@ -53,7 +53,7 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <label for="email">Email <span class="text-danger">*</span></label>
+                                                <label for="email">Email<span class="text-danger">*</span></label>
                                                 {!! Form::email('email', old('email'), [
                                                     'id' => 'email',
                                                     'class' => 'form-control' . ($errors->has('email') ? ' is-invalid' : ''),
@@ -71,7 +71,7 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <label for="full-name" class="form-label">Jenis Kelamin <span
+                                                <label for="full-name" class="form-label">Jenis Kelamin<span
                                                         class="text-danger">*</span></label>
 
                                                 {!! Form::select('gender', ['M' => 'Laki-Laki', 'F' => 'Perempuan'], old('gender'), [
@@ -97,8 +97,6 @@
                                                 {!! Form::date('birth_date', old('birth_date'), [
                                                     'id' => 'birth_date',
                                                     'class' => 'form-control' . ($errors->has('birth_date') ? ' is-invalid' : ''),
-                                                    'placeholder' => 'User Birth Date',
-                                                    'autofocus',
                                                     'required',
                                                 ]) !!}
 
@@ -153,7 +151,8 @@
 
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <label for="password" class="form-label">Password</label>
+                                                <label for="password" class="form-label">Password<span
+                                                        class="text-danger">*</span></label>
                                                 {!! Form::password('password', [
                                                     'id' => 'password',
                                                     'class' => 'form-control' . ($errors->has('password') ? ' is-invalid' : ''),
@@ -172,7 +171,7 @@
                                         <div class="col-lg-6">
                                             <div class="form-group">
                                                 <label for="password-confirm" class="form-label">Konfirmasi
-                                                    Password</label>
+                                                    Password<span class="text-danger">*</span></label>
                                                 <input id="password-confir" class="form-control" type="password"
                                                     placeholder="********" name="password_confirmation" required
                                                     autocomplete="new-password">

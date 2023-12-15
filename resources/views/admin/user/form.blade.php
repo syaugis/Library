@@ -88,7 +88,6 @@
                                 {!! Form::date('birth_date', old('birth_date'), [
                                     'id' => 'birth_date',
                                     'class' => 'form-control' . ($errors->has('birth_date') ? ' is-invalid' : ''),
-                                    'placeholder' => 'User Birth Date',
                                     'autofocus',
                                     'required',
                                 ]) !!}
